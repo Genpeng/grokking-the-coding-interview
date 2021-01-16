@@ -1,4 +1,4 @@
-package p01_sliding_window.q07_longest_subarray_with_ones_after_replacement;
+package pattern01_sliding_window.q07_longest_subarray_with_ones_after_replacement;
 
 /**
  * The description of problem is as follow:

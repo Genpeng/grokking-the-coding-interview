@@ -1,4 +1,4 @@
-package p01_sliding_window.q09_string_anagrams;
+package pattern01_sliding_window.q09_string_anagrams;
 
 import java.util.ArrayList;
 import java.util.HashMap;

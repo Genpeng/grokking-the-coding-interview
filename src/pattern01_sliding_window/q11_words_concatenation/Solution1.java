@@ -1,4 +1,4 @@
-package p01_sliding_window.q11_words_concatenation;
+package pattern01_sliding_window.q11_words_concatenation;
 
 import java.util.HashMap;
 import java.util.LinkedList;

@@ -1,4 +1,4 @@
-package p01_sliding_window.q10_minimum_window_containing_substring;
+package pattern01_sliding_window.q10_minimum_window_containing_substring;
 
 /**
  * The description of problem is as follow:

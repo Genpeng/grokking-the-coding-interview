@@ -1,4 +1,4 @@
-package p01_sliding_window.q06_longest_substring_with_same_letters_after_replacement;
+package pattern01_sliding_window.q06_longest_substring_with_same_letters_after_replacement;
 
 import java.util.HashMap;
 import java.util.Map;

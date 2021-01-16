@@ -1,4 +1,4 @@
-package p01_sliding_window.q08_permutation_in_a_string;
+package pattern01_sliding_window.q08_permutation_in_a_string;
 
 import java.util.HashMap;
 import java.util.Map;
