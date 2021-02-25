@@ -35,15 +35,13 @@ public class Solution2 {
         for (int i = 0; i < ri;) { // 注意这里的终止条件 i < ri，>= ri 的位置都是摆放好的 2，所以不需要再进行调整
             if (nums[i] == 0) {
                 ++li;
-                if (li != i) {
+                if (i != li) {
                     swap(nums, li, i);
                 }
                 ++i;
             } else if (nums[i] == 2) {
                 --ri;
-                if (ri != i) {
-                    swap(nums, ri, i);
-                }
+                swap(nums, ri, i);
             } else {
                 ++i;
             }
