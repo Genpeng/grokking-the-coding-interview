@@ -72,6 +72,8 @@ public class Solution1 {
 
     public static void main(String[] args) {
         Solution1 solu = new Solution1();
-        System.out.println(solu.searchQuadruplets(new int[] {4, 1, 2, -1, 1, -3}, 1));
+        System.out.println(solu.searchQuadruplets(new int[] {4, 1, 2, -1, 1, -3}, 1)); // [[-3, -1, 1, 4], [-3, 1, 1, 2]]
+        System.out.println(solu.searchQuadruplets(new int[] {2, 0, -1, 1, -2, 2}, 2)); // [[-2, 0, 2, 2], [-1, 0, 1, 2]]
+
     }
 }
