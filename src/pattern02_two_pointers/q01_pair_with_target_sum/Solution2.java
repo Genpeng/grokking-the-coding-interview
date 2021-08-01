@@ -36,14 +36,17 @@ public class Solution2 {
      * @return int[], a pair in the array whose sum is equal to the given target
      */
     public int[] twoSum(int[] nums, int target) {
+        if (nums == null || nums.length < 2) {
+            return new int[] {-1, -1};
+        }
         int n = nums.length;
         int li = 0, ri = n - 1;
-        int s;
+        int diff;
         while (li < ri) {
-            s = nums[li] + nums[ri] - target;
-            if (s == 0) {
+            diff = nums[li] + nums[ri] - target;
+            if (diff == 0) {
                 return new int[] {li, ri};
-            } else if (s < 0) {
+            } else if (diff < 0) {
                 ++li;
             } else {
                 --ri;

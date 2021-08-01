@@ -36,10 +36,11 @@ public class Solution1 {
      * @return int[], a pair in the array whose sum is equal to the given target
      */
     public int[] twoSum(int[] nums, int target) {
-        int n = nums.length;
-        if (n < 2) {
-            return new int[] {-1, -1};
+        int[] ans = {-1, -1};
+        if (nums == null || nums.length < 2) {
+            return ans;
         }
+        int n = nums.length;
         Map<Integer, Integer> indexMap = new HashMap<>(n);
         for (int i = 0; i < n; ++i) {
             int num = nums[i];
@@ -49,7 +50,7 @@ public class Solution1 {
                 indexMap.put(target - num, i);
             }
         }
-        return new int[] {-1, -1};
+        return ans;
     }
 
     public static void main(String[] args) {
