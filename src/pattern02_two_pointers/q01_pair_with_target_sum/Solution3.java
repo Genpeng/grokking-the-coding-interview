@@ -1,8 +1,6 @@
 package pattern02_two_pointers.q01_pair_with_target_sum;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * The description of problem is as follow:
@@ -27,34 +25,37 @@ import java.util.Map;
  *
  * @author Genpeng Xu (xgp1227atgmail.com)
  */
-public class Solution1 {
+public class Solution3 {
     /**
-     * Approach 1: Hash Table
+     * Approach 3: Two Pointers
+     * Time Complexity: O(n)
+     * Space Complexity: O(1)
      *
      * @param nums int[], an array of sorted numbers
      * @param target int, the target number
      * @return int[], a pair in the array whose sum is equal to the given target
      */
     public int[] twoSum(int[] nums, int target) {
-        int[] ans = {-1, -1};
         if (nums == null || nums.length < 2) {
-            return ans;
+            return new int[] {-1, -1};
         }
-        int n = nums.length;
-        Map<Integer, Integer> indexMap = new HashMap<>(n);
-        for (int i = 0; i < n; ++i) {
-            int num = nums[i];
-            if (indexMap.containsKey(num)) {
-                return new int[] {indexMap.get(num), i};
+        final int n = nums.length;
+        int li = 0, ri = n - 1;
+        while (li < ri) {
+            int diff = target - nums[li] - nums[ri];
+            if (diff == 0) {
+                return new int[] {li, ri};
+            } else if (diff < 0) {
+                --ri;
             } else {
-                indexMap.put(target - num, i);
+                ++li;
             }
         }
-        return ans;
+        return new int[] {-1, -1};
     }
 
     public static void main(String[] args) {
-        Solution1 solu = new Solution1();
+        Solution3 solu = new Solution3();
         System.out.println(Arrays.toString(solu.twoSum(new int[] {1, 2, 3, 4, 6}, 6))); // [1, 3]
         System.out.println(Arrays.toString(solu.twoSum(new int[] {2, 5, 9, 11}, 11))); // [0, 2]
     }
