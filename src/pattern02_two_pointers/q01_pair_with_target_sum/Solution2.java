@@ -1,8 +1,6 @@
 package pattern02_two_pointers.q01_pair_with_target_sum;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * The description of problem is as follow:
