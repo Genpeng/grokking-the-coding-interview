@@ -1,5 +1,9 @@
 package pattern02_two_pointers.q02_remove_duplicates;
 
+import utils.ArrayUtil;
+
+import java.util.Arrays;
+
 /**
  * The description of problem is as follow:
  * ==========================================================================================================
@@ -35,5 +39,28 @@ public class Solution1 {
             }
         }
         return li + 1;
+    }
+
+    public int removeDuplicatesV2(int[] nums) {
+        final int L = nums.length;
+        if (L < 2) {
+            return L;
+        }
+        int i = 0;
+        for (int j = 1; j < L; ++j) {
+            if (nums[i] != nums[j]) {
+                ++i;
+                if (i < j) {
+                    ArrayUtil.swap(nums, i, j);
+                }
+            }
+        }
+        return i + 1;
+    }
+
+    public static void main(String[] args) {
+        Solution1 solu = new Solution1();
+        System.out.println(solu.removeDuplicates(new int[] {2, 3, 3, 3, 6, 9, 9}));
+        System.out.println(solu.removeDuplicates(new int[] {2, 2, 2, 11}));
     }
 }
