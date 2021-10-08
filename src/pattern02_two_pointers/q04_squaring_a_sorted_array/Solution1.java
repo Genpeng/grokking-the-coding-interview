@@ -36,7 +36,7 @@ public class Solution1 {
         } else {
             int i = n - 1;
             int li = 0, ri = n - 1;
-            while (li < ri) {
+            while (li <= ri) {
                 if (Math.abs(nums[li]) < Math.abs(nums[ri])) {
                     squares[i] = nums[ri] * nums[ri];
                     --ri;
@@ -54,5 +54,6 @@ public class Solution1 {
         Solution1 solu = new Solution1();
         System.out.println(Arrays.toString(solu.makeSquares(new int[] {-2, -1, 0, 2, 3})).equals("[0, 1, 4, 4, 9]"));
         System.out.println(Arrays.toString(solu.makeSquares(new int[] {-3, -1, 0, 1, 2})).equals("[0, 1, 1, 4, 9]"));
+        System.out.println(Arrays.toString(solu.makeSquares(new int[] {-3, -1, 1, 1, 2})).equals("[1, 1, 1, 4, 9]"));
     }
 }
