@@ -9,18 +9,18 @@ import java.util.List;
  * ==========================================================================================================
  * Given an array of unsorted numbers and a target number, find all unique quadruplets in it,
  * whose sum is equal to the target number.
- *
+ * <p>
  * Example 1:
  * Input: [4, 1, 2, -1, 1, -3], target=1
  * Output: [-3, -1, 1, 4], [-3, 1, 1, 2]
  * Explanation: Both the quadruplets add up to the target.
- *
+ * <p>
  * Example 2:
  * Input: [2, 0, -1, 1, -2, 2], target=2
  * Output: [-2, 0, 2, 2], [-1, 0, 1, 2]
  * Explanation: Both the quadruplets add up to the target.
  * ==========================================================================================================
- *
+ * <p>
  * Difficulty: Medium
  * Tags: array;
  *
@@ -35,11 +35,11 @@ public class Solution1 {
         Arrays.sort(nums);
         int n = nums.length;
         for (int i = 0; i <= n - 4; ++i) {
-            if (i > 0 && nums[i] == nums[i-1]) {
+            if (i > 0 && nums[i] == nums[i - 1]) {
                 continue;
             }
             for (int j = i + 1; j <= n - 3; ++j) {
-                if (j > i+1 && nums[j] == nums[j-1]) {
+                if (j > i + 1 && nums[j] == nums[j - 1]) {
                     continue;
                 }
                 searchPairs(nums, target, i, j, quadruplets);
@@ -54,10 +54,10 @@ public class Solution1 {
             int diff = target - nums[first] - nums[second] - nums[li] - nums[ri];
             if (diff == 0) {
                 quadruplets.add(Arrays.asList(nums[first], nums[second], nums[li], nums[ri]));
-                while (li < ri && nums[li] == nums[li+1]) {
+                while (li < ri && nums[li] == nums[li + 1]) {
                     ++li;
                 }
-                while (li < ri && nums[ri] == nums[ri-1]) {
+                while (li < ri && nums[ri] == nums[ri - 1]) {
                     --ri;
                 }
                 ++li;
@@ -72,8 +72,8 @@ public class Solution1 {
 
     public static void main(String[] args) {
         Solution1 solu = new Solution1();
-        System.out.println(solu.searchQuadruplets(new int[] {4, 1, 2, -1, 1, -3}, 1)); // [[-3, -1, 1, 4], [-3, 1, 1, 2]]
-        System.out.println(solu.searchQuadruplets(new int[] {2, 0, -1, 1, -2, 2}, 2)); // [[-2, 0, 2, 2], [-1, 0, 1, 2]]
+        System.out.println(solu.searchQuadruplets(new int[]{4, 1, 2, -1, 1, -3}, 1)); // [[-3, -1, 1, 4], [-3, 1, 1, 2]]
+        System.out.println(solu.searchQuadruplets(new int[]{2, 0, -1, 1, -2, 2}, 2)); // [[-2, 0, 2, 2], [-1, 0, 1, 2]]
 
     }
 }

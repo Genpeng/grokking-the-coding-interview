@@ -8,18 +8,18 @@ import java.util.List;
  * ==========================================================================================================
  * Given an array with positive numbers and a target number, find all of its contiguous subarrays whose
  * product is less than the target number.
- *
+ * <p>
  * Example 1:
  * Input: [2, 5, 3, 10], target=30
  * Output: [2], [5], [2, 5], [3], [5, 3], [10]
  * Explanation: There are six contiguous subarrays whose product is less than the target.
- *
+ * <p>
  * Example 2:
  * Input: [8, 2, 6, 5], target=50
  * Output: [8], [2], [8, 2], [6], [2, 6], [5], [6, 5]
  * Explanation: There are seven contiguous subarrays whose product is less than the target.
  * ==========================================================================================================
- *
+ * <p>
  * Difficulty: Medium
  * Tags: array;two pointers;sliding window;
  *
@@ -49,7 +49,7 @@ public class Solution1 {
 
     public static void main(String[] args) {
         Solution1 solu = new Solution1();
-        System.out.println(solu.findSubarrays(new int[] {2, 5, 3, 10}, 30)); // [2], [5], [2, 5], [3], [5, 3], [10]
-        System.out.println(solu.findSubarrays(new int[] {8, 2, 6, 5}, 50)); // [8], [2], [8, 2], [6], [2, 6], [5], [6, 5]
+        System.out.println(solu.findSubarrays(new int[]{2, 5, 3, 10}, 30)); // [2], [5], [2, 5], [3], [5, 3], [10]
+        System.out.println(solu.findSubarrays(new int[]{8, 2, 6, 5}, 50)); // [8], [2], [8, 2], [6], [2, 6], [5], [6, 5]
     }
 }

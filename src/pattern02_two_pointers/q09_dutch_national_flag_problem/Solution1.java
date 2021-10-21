@@ -7,19 +7,19 @@ import java.util.Arrays;
  * ==========================================================================================================
  * Given an array containing 0s, 1s and 2s, sort the array in-place. You should treat numbers of the array
  * as objects, hence, we can’t count 0s, 1s, and 2s to recreate the array.
- *
+ * <p>
  * The flag of the Netherlands consists of three colors: red, white and blue; and since our input array
  * also consists of three different numbers that is why it is called Dutch National Flag problem.
- *
+ * <p>
  * Example 1:
  * Input: [1, 0, 2, 1, 0]
  * Output: [0 0 1 1 2]
- *
+ * <p>
  * Example 2:
  * Input: [2, 2, 0, 1, 2, 0]
  * Output: [0 0 1 2 2 2 ]
  * ==========================================================================================================
- *
+ * <p>
  * Difficulty: Medium
  * Tags: array;two pointers;
  *
@@ -55,7 +55,7 @@ public class Solution1 {
 
     public static void main(String[] args) {
         Solution1 solu = new Solution1();
-        int[] a1 = new int[] {1, 0, 2, 1, 0};
+        int[] a1 = new int[]{1, 0, 2, 1, 0};
         System.out.println(Arrays.toString(a1));
         solu.dutchFlagSort(a1);
         System.out.println(Arrays.toString(a1));

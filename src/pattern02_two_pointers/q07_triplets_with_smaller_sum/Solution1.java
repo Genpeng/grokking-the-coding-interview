@@ -8,19 +8,19 @@ import java.util.Arrays;
  * Given an array arr of unsorted numbers and a target sum, count all triplets in it such that
  * arr[i] + arr[j] + arr[k] < target where i, j, and k are three different indices.
  * Write a function to return the count of such triplets.
- *
+ * <p>
  * Example 1:
  * Input: [-1, 0, 2, 3], target=3
  * Output: 2
  * Explanation: There are two triplets whose sum is less than the target: [-1, 0, 3], [-1, 0, 2]
- *
+ * <p>
  * Example 2:
  * Input: [-1, 4, 2, 1, 3], target=5
  * Output: 4
  * Explanation: There are four triplets whose sum is less than the target:
- *    [-1, 1, 4], [-1, 1, 3], [-1, 1, 2], [-1, 2, 3]
+ * [-1, 1, 4], [-1, 1, 3], [-1, 1, 2], [-1, 2, 3]
  * ==========================================================================================================
- *
+ * <p>
  * Difficulty: Medium
  * Tags: array;two pointers;
  *
@@ -35,7 +35,7 @@ public class Solution1 {
         int n = nums.length;
         int count = 0;
         for (int i = 0; i < n - 2; ++i) {
-            if (i > 0 && nums[i] == nums[i-1]) {
+            if (i > 0 && nums[i] == nums[i - 1]) {
                 continue;
             }
             int li = i + 1, ri = n - 1;
@@ -55,7 +55,7 @@ public class Solution1 {
 
     public static void main(String[] args) {
         Solution1 solu = new Solution1();
-        System.out.println(solu.searchTriplets(new int[] {-1, 0, 2, 3}, 3) == 2);
-        System.out.println(solu.searchTriplets(new int[] {-1, 4, 2, 1, 3}, 5) == 4);
+        System.out.println(solu.searchTriplets(new int[]{-1, 0, 2, 3}, 3) == 2);
+        System.out.println(solu.searchTriplets(new int[]{-1, 4, 2, 1, 3}, 5) == 4);
     }
 }
