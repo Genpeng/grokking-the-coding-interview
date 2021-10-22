@@ -1,7 +1,7 @@
 package pattern02_two_pointers.q05_triplet_sum_to_zero;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -25,47 +25,50 @@ import java.util.List;
  *
  * @author Genpeng Xu (xgp1227atgmail.com)
  */
-public class Solution1 {
+public class Solution3 {
     /**
-     * 解法1：暴力解法
-     * 时间复杂度：O(n^3)
+     * 解法3：双指针
+     * 时间复杂度：O(n^2)
      * 空间复杂度：O(1)
      *
      * @param nums int[], input array of unsorted numbers
      * @return List<List<Integer>>, all triplets whose sum is equal to zero
      */
     public List<List<Integer>> searchTriplets(int[] nums) {
-        final int L = nums.length;
-        if (L < 3) {
-            return new ArrayList<>();
+        int n = nums.length;
+        List<List<Integer>> triplets = new LinkedList<>();
+        if (n < 3) {
+            return triplets;
         }
-        Arrays.sort(nums);
-        List<List<Integer>> triplets = new ArrayList<>();
-        for (int i = 0; i < L - 2; ++i) {
-            if (i > 0 && nums[i] == nums[i-1]) {
+        Arrays.parallelSort(nums);
+        for (int i = 0; i < n - 2; ++i) {
+            if (i > 0 && nums[i] == nums[i - 1]) {
                 continue;
             }
-            for (int j = i + 1; j < L - 1; ++j) {
-                if (j > i + 1 && nums[j] == nums[j-1]) {
-                    continue;
-                }
-                for (int k = j + 1; k < L; ++k) {
-                    if (k > j + 1 && nums[k] == nums[k-1]) {
-                        continue;
-                    }
-                    int diff = - nums[i] - nums[j] - nums[k];
-                    if (diff == 0) {
-                        triplets.add(Arrays.asList(nums[i], nums[j], nums[k]));
-                    }
-                }
-            }
+            searchPairs(nums, -nums[i], i + 1, n - 1, triplets);
         }
         return triplets;
     }
 
-    public static void main(String[] args) {
-        Solution1 solu = new Solution1();
-        System.out.println(solu.searchTriplets(new int[] {-3, 0, 1, 2, -1, 1, -2})); // [-3, 1, 2], [-2, 0, 2], [-2, 1, 1], [-1, 0, 1]
-        System.out.println(solu.searchTriplets(new int[] {-5, 2, -1, -2, 3})); // [[-5, 2, 3], [-2, -1, 3]]
+    private void searchPairs(int[] nums, int target, int li, int ri, List<List<Integer>> triplets) {
+        int s;
+        while (li < ri) {
+            s = nums[li] + nums[ri] - target;
+            if (s == 0) {
+                triplets.add(Arrays.asList(-target, nums[li], nums[ri]));
+                while (li < ri && nums[li] == nums[li + 1]) {
+                    ++li;
+                }
+                while (li < ri && nums[ri] == nums[ri - 1]) {
+                    --ri;
+                }
+                ++li;
+                --ri;
+            } else if (s < 0) {
+                ++li;
+            } else { // s > 0
+                --ri;
+            }
+        }
     }
 }
