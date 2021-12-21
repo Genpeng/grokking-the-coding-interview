@@ -2,8 +2,6 @@ package pattern02_two_pointers.q02_remove_duplicates;
 
 import utils.ArrayUtil;
 
-import java.util.Arrays;
-
 /**
  * The description of problem is as follow:
  * ==========================================================================================================
@@ -28,17 +26,17 @@ import java.util.Arrays;
  */
 public class Solution1 {
     public int removeDuplicates(int[] nums) {
-        int n = nums.length;
-        if (n < 2) {
-            return n;
+        final int L = nums.length;
+        if (L < 2) {
+            return L;
         }
-        int li = 0; // li 表示最后一个不重复元素的位置
-        for (int ri = 1; ri < n; ++ri) {
-            if (nums[ri] != nums[li]) {
-                nums[++li] = nums[ri];
+        int i = 0; // i 表示最后一个不重复元素的位置
+        for (int j = 1; j < L; ++j) {
+            if (nums[j] != nums[i]) {
+                nums[++i] = nums[j];
             }
         }
-        return li + 1;
+        return i + 1;
     }
 
     public int removeDuplicatesV2(int[] nums) {
@@ -60,7 +58,7 @@ public class Solution1 {
 
     public static void main(String[] args) {
         Solution1 solu = new Solution1();
-        System.out.println(solu.removeDuplicates(new int[]{2, 3, 3, 3, 6, 9, 9}));
-        System.out.println(solu.removeDuplicates(new int[]{2, 2, 2, 11}));
+        System.out.println(solu.removeDuplicates(new int[] {2, 3, 3, 3, 6, 9, 9}));
+        System.out.println(solu.removeDuplicates(new int[] {2, 2, 2, 11}));
     }
 }
