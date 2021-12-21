@@ -36,22 +36,23 @@ public class Solution3 {
      * @return int[], a pair in the array whose sum is equal to the given target
      */
     public int[] twoSum(int[] nums, int target) {
+        int[] result = {-1, -1};
         if (nums == null || nums.length < 2) {
-            return new int[]{-1, -1};
+            return result;
         }
         final int n = nums.length;
         int li = 0, ri = n - 1;
         while (li < ri) {
             int diff = target - nums[li] - nums[ri];
             if (diff == 0) {
-                return new int[]{li, ri};
+                return new int[] {li, ri};
             } else if (diff < 0) {
                 --ri;
             } else {
                 ++li;
             }
         }
-        return new int[]{-1, -1};
+        return result;
     }
 
     public static void main(String[] args) {

@@ -38,9 +38,9 @@ public class Solution2 {
      * @return int[], a pair in the array whose sum is equal to the given target
      */
     public int[] twoSum(int[] nums, int target) {
-        int[] ans = {-1, -1};
+        int[] result = {-1, -1};
         if (nums == null || nums.length < 2) {
-            return ans;
+            return result;
         }
         int n = nums.length;
         Map<Integer, Integer> indexMap = new HashMap<>(n);
@@ -52,7 +52,7 @@ public class Solution2 {
                 indexMap.put(target - num, i);
             }
         }
-        return ans;
+        return result;
     }
 
     public static void main(String[] args) {

@@ -36,11 +36,15 @@ public class Solution1 {
      * @return int[], a pair in the array whose sum is equal to the given target
      */
     public int[] twoSum(int[] nums, int target) {
+        int[] result = {-1, -1};
         if (nums == null || nums.length < 2) {
-            return new int[]{-1, -1};
+            return result;
         }
         int L = nums.length;
         for (int i = 0; i < L - 1; ++i) {
+            if (i > 0 && nums[i] == nums[i-1]) {
+                continue;
+            }
             for (int j = i + 1; j < L; ++j) {
                 if (j > i + 1 && nums[j] == nums[j - 1]) {
                     continue;
@@ -50,7 +54,7 @@ public class Solution1 {
                 }
             }
         }
-        return new int[]{-1, -1};
+        return result;
     }
 
     public static void main(String[] args) {
