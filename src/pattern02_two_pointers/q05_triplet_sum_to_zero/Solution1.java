@@ -32,7 +32,7 @@ public class Solution1 {
      * 空间复杂度：O(1)
      *
      * @param nums int[], input array of unsorted numbers
-     * @return List<List<Integer>>, all triplets whose sum is equal to zero
+     * @return List<List < Integer>>, all triplets whose sum is equal to zero
      */
     public List<List<Integer>> searchTriplets(int[] nums) {
         final int L = nums.length;
@@ -42,18 +42,18 @@ public class Solution1 {
         Arrays.sort(nums);
         List<List<Integer>> triplets = new ArrayList<>();
         for (int i = 0; i < L - 2; ++i) {
-            if (i > 0 && nums[i] == nums[i-1]) {
+            if (i > 0 && nums[i] == nums[i - 1]) {
                 continue;
             }
             for (int j = i + 1; j < L - 1; ++j) {
-                if (j > i + 1 && nums[j] == nums[j-1]) {
+                if (j > i + 1 && nums[j] == nums[j - 1]) {
                     continue;
                 }
                 for (int k = j + 1; k < L; ++k) {
-                    if (k > j + 1 && nums[k] == nums[k-1]) {
+                    if (k > j + 1 && nums[k] == nums[k - 1]) {
                         continue;
                     }
-                    int diff = - nums[i] - nums[j] - nums[k];
+                    int diff = -nums[i] - nums[j] - nums[k];
                     if (diff == 0) {
                         triplets.add(Arrays.asList(nums[i], nums[j], nums[k]));
                     }
