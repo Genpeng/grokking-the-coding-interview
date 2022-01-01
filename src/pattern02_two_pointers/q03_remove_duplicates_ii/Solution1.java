@@ -25,7 +25,7 @@ package pattern02_two_pointers.q03_remove_duplicates_ii;
 public class Solution1 {
     public int removeDuplicates(int[] nums, int key) {
         int n = nums.length;
-        int i = -1; // i 是一个边界，边界左边是满足条件的元素，边界右边是不满足条件的元素
+        int i = -1; // i 是一个边界，边界左边是满足条件的元素（包含自己），边界右边是不满足条件的元素
         for (int j = 0; j < n; ++j) {
             if (nums[j] != key) {
                 nums[++i] = nums[j];
