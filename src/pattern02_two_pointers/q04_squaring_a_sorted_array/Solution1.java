@@ -24,19 +24,19 @@ import java.util.Arrays;
  */
 public class Solution1 {
     public int[] makeSquares(int[] nums) {
-        final int L = nums.length;
-        if (L == 0) {
+        if (nums == null || nums.length == 0) {
             return new int[] {};
         }
+        final int L = nums.length;
         int[] squares = new int[L];
         if (nums[0] >= 0) {
+            // 优化点
             for (int i = 0; i < L; ++i) {
                 squares[i] = nums[i] * nums[i];
             }
         } else {
-            int k = L - 1;
-            int li = 0, ri = L - 1;
-            while (li <= ri) {
+            int li = 0, ri = L - 1, k = L - 1;
+            while (li <= ri) { // 注意：此处是等号，不然会缺少一个元素
                 if (Math.abs(nums[li]) < Math.abs(nums[ri])) {
                     squares[k] = nums[ri] * nums[ri];
                     --ri;
