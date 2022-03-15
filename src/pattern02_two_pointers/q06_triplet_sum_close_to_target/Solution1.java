@@ -33,32 +33,34 @@ import java.util.Arrays;
 public class Solution1 {
     public int searchTriplet(int[] nums, int target) {
         if (nums == null || nums.length < 3) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("input array is illegal");
         }
+
+        // sort the array
         Arrays.parallelSort(nums);
-        int n = nums.length;
+
+        final int L = nums.length;
         int minDiff = Integer.MAX_VALUE;
-        for (int i = 0; i < n - 2; ++i) {
-            if (i > 0 && nums[i] == nums[i - 1]) {
-                continue;
-            }
-            int li = i + 1, ri = n - 1;
-            int diff;
+        for (int i = 0; i < L - 2; ++i) {
+            int li = i + 1, ri = L - 1;
             while (li < ri) {
-                diff = target - nums[i] - nums[li] - nums[ri];
+                int diff = target - nums[i] - nums[li] - nums[ri];
                 if (diff == 0) {
                     minDiff = diff;
                     break;
+                } else if (diff < 0) {
+                    --ri;
+                } else {
+                    ++li;
                 }
                 // diff != 0
-                if (Math.abs(diff) < Math.abs(minDiff) || (Math.abs(diff) == Math.abs(minDiff) && diff > minDiff)) {
+                if (Math.abs(diff) < Math.abs(minDiff)) {
                     minDiff = diff;
                 }
-                if (diff > 0) {
-                    ++li;
-                } else {
-                    --ri;
-                }
+            }
+
+            while (i < L - 2 && nums[i] == nums[i+1]) {
+                ++i;
             }
         }
         return target - minDiff;
