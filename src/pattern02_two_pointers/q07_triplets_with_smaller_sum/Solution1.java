@@ -28,17 +28,17 @@ import java.util.Arrays;
  */
 public class Solution1 {
     public int searchTriplets(int[] nums, int target) {
+        int count = 0;
         if (nums == null || nums.length < 3) {
-            return -1;
+            return count;
         }
         Arrays.parallelSort(nums);
-        int n = nums.length;
-        int count = 0;
-        for (int i = 0; i < n - 2; ++i) {
+        final int L = nums.length;
+        for (int i = 0; i < L - 2; ++i) {
             if (i > 0 && nums[i] == nums[i - 1]) {
                 continue;
             }
-            int li = i + 1, ri = n - 1;
+            int li = i + 1, ri = L - 1;
             int diff;
             while (li < ri) {
                 diff = target - nums[i] - nums[li] - nums[ri];
