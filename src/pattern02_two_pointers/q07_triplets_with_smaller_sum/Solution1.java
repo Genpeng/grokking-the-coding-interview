@@ -53,6 +53,33 @@ public class Solution1 {
         return count;
     }
 
+    public int searchTripletsV2(int[] nums, int target) {
+        int count = 0;
+        if (nums == null || nums.length < 3) {
+            return count;
+        }
+        Arrays.parallelSort(nums);
+        final int L = nums.length;
+        for (int i = 0; i < L - 2; ++i) {
+            count += countPairLessThanTarget(nums, target - nums[i], i+1, L-1);
+        }
+        return count;
+    }
+
+    private int countPairLessThanTarget(int[] nums, int target, int li, int ri) {
+        int count = 0;
+        while (li < ri) {
+            int diff = target - nums[li] - nums[ri];
+            if (diff > 0) {
+                count += (ri - li);
+                ++li;
+            } else {
+                --ri;
+            }
+        }
+        return count;
+    }
+
     public static void main(String[] args) {
         Solution1 solu = new Solution1();
         System.out.println(solu.searchTriplets(new int[]{-1, 0, 2, 3}, 3) == 2);
