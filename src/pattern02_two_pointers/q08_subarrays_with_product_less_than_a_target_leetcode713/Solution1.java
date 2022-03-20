@@ -1,5 +1,6 @@
 package pattern02_two_pointers.q08_subarrays_with_product_less_than_a_target_leetcode713;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -31,11 +32,11 @@ public class Solution1 {
         if (nums == null || nums.length == 0) {
             return subarrays;
         }
-        int n = nums.length;
+        final int L = nums.length;
         int product = 1;
-        for (int li = 0, ri = 0; ri < n; ++ri) {
+        for (int li = 0, ri = 0; ri < L; ++ri) {
             product *= nums[ri];
-            while (product >= target) {
+            while (li <= ri && product >= target) {
                 product /= nums[li++];
             }
             LinkedList<Integer> subarray = new LinkedList<>();
