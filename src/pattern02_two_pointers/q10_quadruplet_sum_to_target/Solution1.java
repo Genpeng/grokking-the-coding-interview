@@ -1,5 +1,6 @@
-package pattern02_two_pointers.q10_quadruple_sum_to_target;
+package pattern02_two_pointers.q10_quadruplet_sum_to_target;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -70,10 +71,52 @@ public class Solution1 {
         }
     }
 
+    public List<List<Integer>> searchQuadrupletsV2(int[] nums, int target) {
+        List<List<Integer>> quadruplets = new ArrayList<>();
+        if (nums == null || nums.length < 4) {
+            return quadruplets;
+        }
+        Arrays.sort(nums);
+        final int L = nums.length;
+        for (int i = 0; i < L - 3; ++i) {
+            for (int j = i + 1; j < L - 2; ++j) {
+                int t = target - nums[i] - nums[j];
+                int li = j + 1, ri = L - 1;
+                while (li < ri) {
+                    int diff = t - nums[li] - nums[ri];
+                    if (diff == 0) {
+                        quadruplets.add(Arrays.asList(nums[i], nums[j], nums[li], nums[ri]));
+                        while (li < ri && nums[li] == nums[li+1]) {
+                            ++li;
+                        }
+                        while (li < ri && nums[ri] == nums[ri-1]) {
+                            --ri;
+                        }
+                        ++li;
+                        --ri;
+                    } else if (diff < 0) {
+                        --ri;
+                    } else {
+                        // diff > 0
+                        ++li;
+                    }
+                }
+                while (j < L - 2 && nums[j] == nums[j+1]) {
+                    ++j;
+                }
+            }
+            while (i < L - 3 && nums[i] == nums[i+1]) {
+                ++i;
+            }
+        }
+        return quadruplets;
+    }
+
     public static void main(String[] args) {
         Solution1 solu = new Solution1();
         System.out.println(solu.searchQuadruplets(new int[]{4, 1, 2, -1, 1, -3}, 1)); // [[-3, -1, 1, 4], [-3, 1, 1, 2]]
         System.out.println(solu.searchQuadruplets(new int[]{2, 0, -1, 1, -2, 2}, 2)); // [[-2, 0, 2, 2], [-1, 0, 1, 2]]
-
+        System.out.println(solu.searchQuadrupletsV2(new int[]{4, 1, 2, -1, 1, -3}, 1)); // [[-3, -1, 1, 4], [-3, 1, 1, 2]]
+        System.out.println(solu.searchQuadrupletsV2(new int[]{2, 0, -1, 1, -2, 2}, 2)); // [[-2, 0, 2, 2], [-1, 0, 1, 2]]
     }
 }
