@@ -33,11 +33,11 @@ package pattern02_two_pointers.q11_compare_strings_containing_backspace;
  * @author Genpeng Xu (xgp1227atgmail.com)
  */
 public class Solution1 {
-    public boolean compare(String str1, String str2) {
-        int i = str1.length() - 1, j = str2.length() - 1;
+    public boolean compare(String s1, String s2) {
+        int i = s1.length() - 1, j = s2.length() - 1;
         while (i >= 0 || j >= 0) {
-            i = getTrueIdx(str1, i);
-            j = getTrueIdx(str2, j);
+            i = getTrueIdx(s1, i);
+            j = getTrueIdx(s2, j);
             if (i < 0 && j < 0) {
                 return true;
             }
@@ -45,7 +45,7 @@ public class Solution1 {
                 // 如果能进入这个判断，肯定至少有一个大于等于 0
                 return false;
             }
-            if (str1.charAt(i) != str2.charAt(j)) {
+            if (s1.charAt(i) != s2.charAt(j)) {
                 // 如果能进入这个判断，i 和 j 都大于等于 0
                 return false;
             }
@@ -76,5 +76,6 @@ public class Solution1 {
         System.out.println(solu.compare("xy#z", "xzz#") == true);
         System.out.println(solu.compare("xy#z", "xyz#") == false);
         System.out.println(solu.compare("xywrrmp", "xywrrmu#p") == true);
+        System.out.println(solu.compare("123#####123", "xgp###123") == true);
     }
 }
