@@ -9,7 +9,7 @@ import entities.ListNode;
  * ==========================================================================================================
  * <p>
  * Difficulty: Easy
- * Tags: linked list; fast & slow pointers
+ * Tags: linked list;fast & slow pointers
  *
  * @author Genpeng Xu (xgp1227atgmail.com)
  */
