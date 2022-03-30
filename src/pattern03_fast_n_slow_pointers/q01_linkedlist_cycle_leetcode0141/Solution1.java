@@ -1,25 +1,11 @@
-package pattern03_fast_n_slow_pointers.q05_middle_of_the_linkedlist;
+package pattern03_fast_n_slow_pointers.q01_linkedlist_cycle_leetcode0141;
 
 import entities.ListNode;
 
 /**
  * The description of problem is as follow:
  * ==========================================================================================================
- * Given the head of a Singly LinkedList, write a method to return the middle node of the LinkedList.
- *
- * If the total number of nodes in the LinkedList is even, return the second middle node.
- *
- * Example 1:
- * Input: 1 -> 2 -> 3 -> 4 -> 5 -> null
- * Output: 3
- *
- * Example 2:
- * Input: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> null
- * Output: 4
- *
- * Example 3:
- * Input: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> null
- * Output: 4
+ * Given the head of a Singly LinkedList, write a function to determine if the LinkedList has a cycle in it or not.
  * ==========================================================================================================
  * <p>
  * Difficulty: Easy
@@ -28,12 +14,15 @@ import entities.ListNode;
  * @author Genpeng Xu (xgp1227atgmail.com)
  */
 public class Solution1 {
-    public ListNode findMiddle(ListNode head) {
+    public boolean hasCycle(ListNode head) {
         ListNode slow = head, fast = head;
         while (fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
+            if (slow == fast) {
+                return true;
+            }
         }
-        return slow;
+        return false;
     }
 }

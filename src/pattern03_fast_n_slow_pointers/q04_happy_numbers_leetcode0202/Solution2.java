@@ -1,7 +1,4 @@
-package pattern03_fast_n_slow_pointers.q04_happy_numbers;
-
-import java.util.HashSet;
-import java.util.Set;
+package pattern03_fast_n_slow_pointers.q04_happy_numbers_leetcode0202;
 
 /**
  * The description of problem is as follow:
@@ -16,15 +13,16 @@ import java.util.Set;
  *
  * @author Genpeng Xu (xgp1227atgmail.com)
  */
-public class Solution1 {
+public class Solution2 {
     public boolean isHappy(int n) {
-        Set<Integer> seen = new HashSet<>();
-        while (n != 1) {
-            if (seen.contains(n)) {
+        int slow = n, fast = n;
+        while (fast != 1) {
+            slow = getNext(slow);
+            fast = getNext(getNext(fast));
+            // 如果存在环，则不是快乐数
+            if (fast != 1 && slow == fast) {
                 return false;
             }
-            seen.add(n);
-            n = getNext(n);
         }
         return true;
     }
@@ -41,7 +39,7 @@ public class Solution1 {
 
     public static void main(String[] args) {
         int n = 10;
-        Solution1 solu = new Solution1();
+        Solution2 solu = new Solution2();
         System.out.println(solu.isHappy(n));
     }
 }

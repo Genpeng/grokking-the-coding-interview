@@ -1,4 +1,4 @@
-package pattern03_fast_n_slow_pointers.q05_palindrome_linkedlist;
+package pattern03_fast_n_slow_pointers.q05_palindrome_linkedlist_leetcode0234;
 
 import entities.ListNode;
 

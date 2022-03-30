@@ -1,6 +1,5 @@
-package pattern02_two_pointers.q08_subarrays_with_product_less_than_a_target_leetcode713;
+package pattern02_two_pointers.q08_subarrays_with_product_less_than_a_target_leetcode0713;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
