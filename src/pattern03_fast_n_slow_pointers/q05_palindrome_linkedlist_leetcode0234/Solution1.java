@@ -27,25 +27,27 @@ import entities.ListNode;
  */
 public class Solution1 {
     public boolean isPalindromic(ListNode head) {
+        // 思路：
+        // 1. 找到链表的中间结点
+        // 2. 逆序后半截的链表
+        // 3. 比较前半截和后半截链表
         if (head == null || head.next == null) {
             return true;
         }
-        // 找出链表的中间结点
-        ListNode middle = getMiddleNode(head);
-        // 反转后半截的链表，用于和前半截比较
-        ListNode tail = reverse(middle);
-        ListNode tailCopy = tail; // 保存链表尾结点，用于比较结束再次反转，使得函数结束链表保持原状
-        while (head != null && tail != null) {
+        ListNode mid = getMiddleNode(head);
+        ListNode tail = reverse(mid);
+        ListNode p1 = head, p2 = tail;
+        while (p1 != null && p2 != null) {
             // 注意：当链表的结点数目为偶数时，在比较的时候，前半截会比后半截多一个结点
-            if (head.val != tail.val) {
+            if (p1.val != p2.val) {
                 break;
             }
-            head = head.next;
-            tail = tail.next;
+            p1 = p1.next;
+            p2 = p2.next;
         }
         // 比较结束，再次反转，回复链表原状
-        reverse(tailCopy);
-        return tail == null;
+        reverse(tail);
+        return p2 == null;
     }
 
     public ListNode getMiddleNode(ListNode head) {
