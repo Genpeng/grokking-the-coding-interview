@@ -1,4 +1,4 @@
-package pattern03_fast_n_slow_pointers.q06_rearrange_linkedlist_leetcode_0143;
+package pattern03_fast_n_slow_pointers.q06_rearrange_linkedlist_leetcode0143;
 
 import entities.ListNode;
 
