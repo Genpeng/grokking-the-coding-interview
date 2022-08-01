@@ -1,4 +1,4 @@
-package pattern03_fast_n_slow_pointers.q03_start_of_linkedlist_cycle;
+package pattern03_fast_n_slow_pointers.q03_start_of_linkedlist_cycle_leetcode0142;
 
 import entities.ListNode;
 
