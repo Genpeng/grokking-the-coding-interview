@@ -34,15 +34,21 @@ package pattern03_fast_n_slow_pointers.q07_cycle_in_a_circular_array_leetcode045
  *
  * @author Genpeng Xu (xgp1227atgmail.com)
  */
-public class Solution1 {
+public class Solution2 {
     /**
      * 判断循环数组中是否存在环（从某个位置出发，经过有限次跳跃，可以回到起点）
      * 环的限制条件：
      * - 元素的数量 > 1
      * - 方向唯一，只能有一个方向
      *
-     * 解题思路：
-     * 快慢指针（fast & slow pointers）
+     * 解题思路：气味标记法，类似动物寻找食物，标记领地的过程
+     * - 每次从一个点出发，不断向下一个位置跳跃，如果中间有一个点不满足环的条件（方向不唯一或者原地跳跃），
+     *   则该点不是环的一个组成元素（即这条路径不存在环）
+     * - 向下一个位置跳跃的过程可以采用递归进行实现，同时，用一个辅助数组标记每一次寻找过的路径（不同的值代表不同的寻找轮次）
+     *
+     * 复杂度分析：
+     * - 时间复杂度：O(N)
+     * - 空间复杂度：O(N)
      *
      * @param nums int[], integer array
      * @return boolean, true if the array has a cycle
@@ -51,35 +57,42 @@ public class Solution1 {
         if (nums == null || nums.length < 2) {
             return false;
         }
+        final int L = nums.length;
+        int[] visited = new int[L];
         for (int i = 0; i < nums.length; ++i) {
-            boolean isForward = nums[i] >= 0;
-            int slow = i, fast = i;
-            do {
-                slow = findNextIndex(nums, isForward, slow);
-                fast = findNextIndex(nums, isForward, fast);
-                if (fast != -1) {
-                    fast = findNextIndex(nums, isForward, fast);
-                }
-            } while (slow != -1 && fast != -1 && slow != fast);
-            if (fast != -1 && slow == fast) {
+            if (existsLoop(nums, visited, nums[i] > 0, i + 1, i)) {
                 return true;
             }
         }
         return false;
     }
 
-    public int findNextIndex(int[] arr, boolean isForward, int idx) {
-        boolean direction = arr[idx] >= 0;
-        if (direction != isForward) {
-            return -1;
+    private boolean existsLoop(int[] nums, int[] visited, boolean forward, int flag, int idx) {
+        // 如果是已经有寻找过的位置，看看是否是同一轮的
+        if (visited[idx] > 0) {
+            return visited[idx] == flag;
         }
-        int nextIdx = (idx + arr[idx]) % arr.length;
+        // 判断是否为同一方向
+        boolean isSameDirection = (nums[idx] > 0) == forward;
+        if (!isSameDirection) {
+            return false;
+        }
+        // 计算下一个位置
+        int nextIdx = (idx + nums[idx]) % nums.length;
         if (nextIdx < 0) {
-            nextIdx += arr.length;
+            nextIdx += nums.length;
         }
+        // 如果在原地跳跃，返回 false
         if (nextIdx == idx) {
-            return -1;
+            return false;
         }
-        return nextIdx;
+        // 如果是没有寻找过的位置，标记一下
+        visited[idx] = flag;
+        return existsLoop(nums, visited, forward, flag, nextIdx);
+    }
+
+    public static void main(String[] args) {
+        Solution2 solu = new Solution2();
+        System.out.println(solu.circularArrayLoop(new int[] {-1, 2, 1, 2}));
     }
 }
