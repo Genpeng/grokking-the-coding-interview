@@ -1,4 +1,4 @@
-package pattern04_merge_intervals.q01_merge_intervals;
+package pattern04_merge_intervals.q01_merge_intervals_leetcode0056;
 
 import java.util.ArrayList;
 import java.util.Arrays;
