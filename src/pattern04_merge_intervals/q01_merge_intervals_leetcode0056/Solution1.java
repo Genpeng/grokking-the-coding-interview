@@ -90,7 +90,7 @@ public class Solution1 {
             if (i == 0 || currL > result.getLast()[1]) {
                 // 如果当前区间不重叠，则将当前区间加入到结果中
                 result.add(new int[] {currL, currR});
-            } else {
+            } else { // currL <= result.getLast()[1] && currL >= result.getLast()[0]
                 // 如果当前区间重叠，则更新结果列表中最后一个区间
                 result.getLast()[1] = Math.max(result.getLast()[1], currR);
             }
