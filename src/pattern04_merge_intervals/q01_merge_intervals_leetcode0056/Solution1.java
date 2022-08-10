@@ -1,9 +1,6 @@
 package pattern04_merge_intervals.q01_merge_intervals_leetcode0056;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 /**
  * The description of problem is as follow:
@@ -37,10 +34,21 @@ public class Solution1 {
      * 合并重叠的区间
      *
      * 输入限制：
-     * 1 <= 区间数量 <= 10^4
+     * - 1 <= 区间数量 <= 10^4
+     * - 0 <= 区间左端点 <= 区间右断点 <= 10^4
      *
      * 解题思路：
      * - 将区间按照左边界进行排序，如果区间可以合并，那么这些可以合并的区间一定是连续的（可以用反证法证明）
+     *
+     * 知识点：
+     * - Arrays.sort 是根据要排序的对象选择排序算法的，如果排序的对象是原生数据类型，则采用 Quicksort；
+     *   如果排序的对象是非原生数据类型（例如 List），则采用 Timsort
+     * - Quicksort 的时间复杂度为 O(N * logN)，空间复杂度为 O(logN)
+     * - Timsort 的时间复杂度为 O(N * logN)，空间复杂度为 O(N)
+     *
+     * 复杂度分析：
+     * 时间复杂度：O(N * logN)
+     * 空间复杂度：O(logN)
      *
      * @param intervals int[][], an array of intervals
      * @return int[][], an array of non-overlapping intervals
@@ -66,6 +74,27 @@ public class Solution1 {
             }
         }
         result.add(new int[] {left, right}); // 重要，记得保存最后的区间
+        return result.toArray(new int[result.size()][2]);
+    }
+
+    public int[][] mergeV2(int[][] intervals) {
+        final int N = intervals.length;
+        if (N < 2) {
+            return intervals;
+        }
+        LinkedList<int[]> result = new LinkedList<>();
+        Arrays.sort(intervals, (i1, i2) -> i1[0] - i2[0]);
+        // Arrays.sort(intervals, Comparator.comparingInt(i -> i[0]));  // 在 LeetCode 上，这种写法多耗时 2ms 左右
+        for (int i = 0; i < N; ++i) {
+            int currL = intervals[i][0], currR = intervals[i][1];
+            if (i == 0 || currL > result.getLast()[1]) {
+                // 如果当前区间不重叠，则将当前区间加入到结果中
+                result.add(new int[] {currL, currR});
+            } else {
+                // 如果当前区间重叠，则更新结果列表中最后一个区间
+                result.getLast()[1] = Math.max(result.getLast()[1], currR);
+            }
+        }
         return result.toArray(new int[result.size()][2]);
     }
 
