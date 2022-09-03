@@ -1,4 +1,4 @@
-package pattern04_merge_intervals.q05_conflicting_appointments;
+package pattern04_merge_intervals.q05_conflicting_appointments_leetcode0252;
 
 import java.util.Arrays;
 import java.util.Comparator;
