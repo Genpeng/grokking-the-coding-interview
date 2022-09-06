@@ -15,7 +15,7 @@ import java.util.Comparator;
  * ==========================================================================================================
  *
  * Difficulty: Easy
- * Tags: xxx;xxx;
+ * Tags: array;
  *
  * @author Genpeng Xu (xgp1227atgmail.com)
  */
@@ -33,8 +33,30 @@ public class Solution1 {
         return false;
     }
 
+    public boolean isOverlappingV2(int[][] intervals) {
+        if (intervals == null || intervals.length < 2) {
+            return false;
+        }
+        final int N = intervals.length;
+        int[][] points = new int[N << 1][2];
+        for (int i = 0; i < N; ++i) {
+            points[2 * i] = new int[] {intervals[i][0], 1};
+            points[2 * i + 1] = new int[] {intervals[i][1], -1};
+        }
+        Arrays.sort(points, (p1, p2) -> p1[0] - p2[0]);
+        int currNum = 0, maxNum = 0;
+        for (int i = 0; i < points.length; ++i) {
+            currNum += points[i][1];
+            maxNum = Math.max(currNum, maxNum);
+            if (maxNum >= 2) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         Solution1 solu = new Solution1();
-        System.out.println(solu.isOverlapping(new int[][] {{1, 4}, {2, 5}, {7, 9}}));
+        System.out.println(solu.isOverlappingV2(new int[][] {{1, 4}, {2, 5}, {7, 9}}));
     }
 }

@@ -43,8 +43,8 @@ public class Solution1 {
         int[][] points = new int[N << 1][2];
         for (int i = 0; i < N; ++i) {
             int start = jobs[i][0], end = jobs[i][1], cpuLoad = jobs[i][2];
-            points[2 * i] = new int[]{start, cpuLoad};
-            points[2 * i + 1] = new int[]{end, -cpuLoad};
+            points[2 * i] = new int[] {start, cpuLoad};
+            points[2 * i + 1] = new int[] {end, -cpuLoad};
         }
         Arrays.sort(points, Comparator.comparingInt(x -> x[0]));
         int currCpuLoad = 0, maxCpuLoad = 0;
