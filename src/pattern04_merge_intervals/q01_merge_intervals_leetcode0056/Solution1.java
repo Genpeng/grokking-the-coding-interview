@@ -50,6 +50,9 @@ public class Solution1 {
      * 时间复杂度：O(N * logN)
      * 空间复杂度：O(logN)
      *
+     * 参考资料：
+     * [1] https://leetcode.cn/problems/merge-intervals/solutions/203562/he-bing-qu-jian-by-leetcode-solution/
+     *
      * @param intervals int[][], an array of intervals
      * @return int[][], an array of non-overlapping intervals
      */
