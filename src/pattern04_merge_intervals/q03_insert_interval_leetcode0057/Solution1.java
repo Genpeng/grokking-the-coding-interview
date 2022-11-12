@@ -11,8 +11,8 @@ import java.util.List;
  * the start and the end of the ith interval and intervals is sorted in ascending order by starti. You are
  * also given an interval newInterval = [start, end] that represents the start and end of another interval.
  *
- * Insert newInterval into intervals such that intervals is still sorted in ascending order by starti and i
- * ntervals still does not have any overlapping intervals (merge overlapping intervals if necessary).
+ * Insert newInterval into intervals such that intervals is still sorted in ascending order by starti and
+ * intervals still does not have any overlapping intervals (merge overlapping intervals if necessary).
  *
  * Return intervals after the insertion.
  *
@@ -25,14 +25,13 @@ import java.util.List;
  * Output: [[1,2],[3,10],[12,16]]
  * Explanation: Because the new interval [4,8] overlaps with [3,5],[6,7],[8,10].
  *
- *
  * Constraints:
- * - 0 <= intervals.length <= 104
+ * - 0 <= intervals.length <= 10^4
  * - intervals[i].length == 2
- * - 0 <= starti <= endi <= 105
- * - intervals is sorted by starti in ascending order.
+ * - 0 <= start_i <= end_i <= 10^5
+ * - intervals is sorted by start_i in ascending order.
  * - newInterval.length == 2
- * - 0 <= start <= end <= 105
+ * - 0 <= start <= end <= 10^5
  * ==========================================================================================================
  * <p>
  * Difficulty: Medium
@@ -107,10 +106,37 @@ public class Solution1 {
         return result.toArray(new int[result.size()][2]);
     }
 
+    public int[][] insertV3(int[][] intervals, int[] newInterval) {
+        if (intervals == null || intervals.length == 0) {
+            return new int[][] {{newInterval[0], newInterval[1]}};
+        }
+        List<int[]> result = new ArrayList<>();
+        int L = newInterval[0], R = newInterval[1];
+        boolean isInserted = false;
+        for (int[] interval : intervals) {
+            if (L > interval[1]) {
+                result.add(interval);
+            } else if (R >= interval[0]) {
+                L = Math.min(L, interval[0]);
+                R = Math.max(R, interval[1]);
+            } else {
+                if (!isInserted) {
+                    result.add(new int[] {L, R});
+                    isInserted = true;
+                }
+                result.add(interval);
+            }
+        }
+        if (!isInserted) {
+            result.add(new int[] {L, R});
+        }
+        return result.toArray(new int[result.size()][2]);
+    }
+
     public static void main(String[] args) {
         Solution1 solu = new Solution1();
-//        int[][] result = solu.insertV2(new int[][] {{1, 3}, {6, 9}}, new int[] {2, 5}); // [[1,5],[6,9]]
-        int[][] result = solu.insertV2(new int[][] {{1, 2}, {3, 5}, {6, 7}, {8, 10}, {12, 16}}, new int[] {4, 8}); // [[1,2],[3,10],[12,16]]
+        int[][] result = solu.insertV3(new int[][] {{1, 3}, {6, 9}}, new int[] {2, 5}); // [[1,5],[6,9]]
+//        int[][] result = solu.insertV3(new int[][] {{1, 2}, {3, 5}, {6, 7}, {8, 10}, {12, 16}}, new int[] {4, 8}); // [[1,2],[3,10],[12,16]]
         for (int[] interval : result) {
             System.out.println(Arrays.toString(interval));
         }
