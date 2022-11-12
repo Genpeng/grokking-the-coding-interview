@@ -34,7 +34,8 @@ public class Solution1 {
         if (A == null || A.length < 2) {
             return true;
         }
-        Arrays.sort(A, Comparator.comparingInt(i -> i[0]));
+        Arrays.sort(A, (i1, i2) -> (i1[0] - i2[0]));
+//        Arrays.sort(A, Comparator.comparingInt(i -> i[0]));
         for (int i = 1; i < A.length; ++i) {
             if (A[i-1][1] > A[i][0]) {
                 // 📢 注意：这里是 > 而不是 >=，因为这里是判断能否参加两个会议，而不是判断是否有交集
