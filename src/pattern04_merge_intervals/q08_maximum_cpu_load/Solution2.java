@@ -1,7 +1,7 @@
 package pattern04_merge_intervals.q08_maximum_cpu_load;
 
 import java.util.Arrays;
-import java.util.Comparator;
+import java.util.PriorityQueue;
 
 /**
  * The description of problem is as follow:
@@ -31,9 +31,9 @@ import java.util.Comparator;
  *
  * @author Genpeng Xu (xgp1227atgmail.com)
  */
-public class Solution1 {
+public class Solution2 {
     /**
-     * 解法一：扫描线算法
+     * 解法二：堆
      * 时间复杂度：O(N * logN)
      * 空间复杂度：O(N)
      *
@@ -49,27 +49,22 @@ public class Solution1 {
         if (N < 2) {
             return jobs[0][2];
         }
-        // 📢 注意：任务必须是有序的
-        // 反例：[[12, 14, 3], [10, 12, 4]]，如果不是有序的，经过点的排序后，结果是 [[10, 4], [12, 3], [12, -4], [14, -3]]
-        // 得到最大的 CPU 负载是 7，但是实际上 4
-        Arrays.sort(jobs, (j1, j2) -> (j1[0] - j2[0]));
-        int[][] points = new int[N << 1][2];
-        for (int i = 0; i < N; ++i) {
-            int start = jobs[i][0], end = jobs[i][1], cpuLoad = jobs[i][2];
-            points[2 * i] = new int[] {start, cpuLoad};
-            points[2 * i + 1] = new int[] {end, -cpuLoad};
+        Arrays.sort(jobs, (j1, j2) -> (j1[0] - j2[0])); // ⚠️ 任务必须是有序的
+        int currLoad = 0, maxLoad = 0;
+        PriorityQueue<int[]> pq = new PriorityQueue<>(N, (j1, j2) -> (j1[1] - j2[1]));
+        for (int[] job : jobs) {
+            while (!pq.isEmpty() && job[0] >= pq.peek()[1]) {
+                currLoad -= pq.poll()[2];
+            }
+            pq.offer(job);
+            currLoad += job[2];
+            maxLoad = Math.max(maxLoad, currLoad);
         }
-        Arrays.sort(points, (p1, p2) -> (p1[0] - p2[0]));
-        int currCpuLoad = 0, maxCpuLoad = 0;
-        for (int[] point : points) {
-            currCpuLoad += point[1];
-            maxCpuLoad = Math.max(maxCpuLoad, currCpuLoad);
-        }
-        return maxCpuLoad;
+        return maxLoad;
     }
 
     public static void main(String[] args) {
-        Solution1 solu = new Solution1();
+        Solution2 solu = new Solution2();
         System.out.println(solu.maxCpuLoad(new int[][] {{1, 4, 3}, {2, 5, 4}, {7, 9, 6}})); // 7
         System.out.println(solu.maxCpuLoad(new int[][] {{6, 7, 10}, {2, 4, 11}, {8, 12, 15}})); // 15
         System.out.println(solu.maxCpuLoad(new int[][] {{1, 4, 2}, {2, 4, 1}, {3, 6, 5}})); // 8

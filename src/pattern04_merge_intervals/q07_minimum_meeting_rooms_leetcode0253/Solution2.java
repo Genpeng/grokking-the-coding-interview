@@ -1,9 +1,6 @@
 package pattern04_merge_intervals.q07_minimum_meeting_rooms_leetcode0253;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * The description of problem is as follow:
@@ -35,16 +32,21 @@ import java.util.List;
  * ==========================================================================================================
  *
  * Difficulty: Medium
- * Tags: array;
+ * Tags: array; heap;
  *
  * Similar LintCode Problem (911. Meeting Rooms II)
  * https://www.lintcode.com/problem/919/
  *
  * @author Genpeng Xu (xgp1227atgmail.com)
  */
-public class Solution1 {
+public class Solution2 {
     /**
-     * 解法一：扫描线算法（Sweep Line）
+     * 解法二：堆
+     *
+     * 思路：
+     * 用一个堆（小顶堆）去模拟当前所有正在进行且有冲突的会议，当进来一个新的会议时，弹出堆中所有结束时间小于等于新会议起始时间
+     * 的会议，则堆中此时存放的就是截止到当前时刻所有有冲突的会议，然后用一个变量保存所有时刻堆中会议数量的最大值，则该变量
+     * 就是容纳所有会议需要的最少会议数量
      *
      * 时间复杂度：O(N * logN)
      * 空间复杂度：O(N)
@@ -53,6 +55,8 @@ public class Solution1 {
      * @return int, the minimum number of rooms required to hold all the meetings
      */
     public int minMeetingRooms(int[][] meetings) {
+        // 问题1：排序的作用是什么？可以去掉吗？
+        // 答：排序的作用对所有的时间间隔按照起始时间进行排序，可以方便比较间隔之间是否有重叠
         if (meetings == null) {
             return 0;
         }
@@ -60,25 +64,21 @@ public class Solution1 {
         if (L < 2) {
             return L;
         }
-        // 📢 注意：会议必须是有序的，即按照起始时间排序
-        // 例如：[[12, 13], [10, 12]]，进行点的排序后，会变成：[[10, 1], [12, 1], [12, -1], [13, -1]]
         Arrays.sort(meetings, (m1, m2) -> (m1[0] - m2[0]));
-        List<int[]> points = new ArrayList<>();
+        PriorityQueue<int[]> pq = new PriorityQueue<>(L, (m1, m2) -> (m1[1] - m2[1]));
+        int minNum = 0;
         for (int[] meeting : meetings) {
-            points.add(new int[] {meeting[0], 1});
-            points.add(new int[] {meeting[1], -1});
+            while (!pq.isEmpty() && meeting[0] >= pq.peek()[1]) {
+                pq.poll();
+            }
+            pq.offer(meeting);
+            minNum = Math.max(minNum, pq.size());
         }
-        Collections.sort(points, (p1, p2) -> (p1[0] - p2[0]));
-        int currNum = 0, maxNum = 0;
-        for (int[] point : points) {
-            currNum += point[1];
-            maxNum = Math.max(maxNum, currNum);
-        }
-        return maxNum;
+        return minNum;
     }
 
     public static void main(String[] args) {
-        Solution1 solu = new Solution1();
+        Solution2 solu = new Solution2();
         System.out.println(solu.minMeetingRooms(new int[][] {{1, 4}, {2, 5}, {7, 9}})); // 2
         System.out.println(solu.minMeetingRooms(new int[][] {{6, 7}, {2, 4}, {8, 12}})); // 1
         System.out.println(solu.minMeetingRooms(new int[][] {{12, 13}, {10, 12}})); // 1
