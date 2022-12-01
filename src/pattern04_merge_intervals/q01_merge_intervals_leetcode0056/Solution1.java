@@ -61,7 +61,8 @@ public class Solution1 {
         if (N < 2) {
             return intervals;
         }
-        Arrays.sort(intervals, Comparator.comparingInt(i -> i[0]));
+        Arrays.sort(intervals, (i1, i2) -> (i1[0] - i2[0]));
+//        Arrays.sort(intervals, Comparator.comparingInt(i -> i[0])); // 在 LeetCode 上，这种写法多耗时 2ms 左右
         List<int[]> result = new ArrayList<>();
         int left = intervals[0][0], right = intervals[0][1];
         for (int i = 1; i < N; ++i) {
@@ -87,7 +88,7 @@ public class Solution1 {
         }
         LinkedList<int[]> result = new LinkedList<>();
         Arrays.sort(intervals, (i1, i2) -> i1[0] - i2[0]);
-        // Arrays.sort(intervals, Comparator.comparingInt(i -> i[0]));  // 在 LeetCode 上，这种写法多耗时 2ms 左右
+//        Arrays.sort(intervals, Comparator.comparingInt(i -> i[0])); // 在 LeetCode 上，这种写法多耗时 2ms 左右
         for (int i = 0; i < N; ++i) {
             int currL = intervals[i][0], currR = intervals[i][1];
             if (i == 0 || currL > result.getLast()[1]) {
