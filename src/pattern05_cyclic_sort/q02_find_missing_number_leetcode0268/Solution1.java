@@ -1,4 +1,7 @@
-package pattern05_cyclic_sort.q02_find_missing_number;
+package pattern05_cyclic_sort.q02_find_missing_number_leetcode0268;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * The description of problem is as follow:
@@ -38,28 +41,56 @@ package pattern05_cyclic_sort.q02_find_missing_number;
  *
  * @author Genpeng Xu (xgp1227atgmail.com)
  */
-public class Solution3 {
+public class Solution1 {
     /**
-     * 解法三：Math
-     * 用 [0, n] 范围内 n+1 个数之和减去输入数组之和即为缺失的数字。
-     *
-     * 等差数列求和公式为：
-     * S_n = n * (a_1 + a_n) / 2
+     * 解法一：Hash Table
+     * 用一个数组标记输入数组（大小为 n）中各个数字是否出现，如果出现，标记为 1；否则为 0。
+     * 之后，遍历一次标记数组，返回值为 0 的索引，即为未出现的数字。
      *
      * 复杂度分析：
      * 时间复杂度：O(N)
-     * 空间复杂度：O(1)
+     * 空间复杂度：O(N)
      *
      * @param nums int[], an integer array containing n distinct numbers in the range [0, n]
      * @return int, the missing number in the range
      */
     public int missingNumber(int[] nums) {
-        final int N = nums.length;
-        int totalSum = (N+1) * N / 2;
-        int arrSum = 0;
+        Set<Integer> seen = new HashSet<>();
         for (int num : nums) {
-            arrSum += num;
+            seen.add(num);
         }
-        return totalSum - arrSum;
+        final int N = nums.length;
+        for (int i = 0; i <= N; ++i) {
+            if (!seen.contains(i)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * 解法一：Hash Table
+     * 用一个数组标记输入数组（大小为 n）中各个数字是否出现，如果出现，标记为 1；否则为 0。
+     * 之后，遍历一次标记数组，返回值为 0 的索引，即为未出现的数字。
+     *
+     * 复杂度分析：
+     * 时间复杂度：O(N)
+     * 空间复杂度：O(N)
+     *
+     * @param nums int[], an integer array containing n distinct numbers in the range [0, n]
+     * @return int, the missing number in the range
+     */
+    public int missingNumberV2(int[] nums) {
+        final int N = nums.length;
+        int[] flags = new int[N + 1];
+        for (int num : nums) {
+            flags[num] = 1;
+        }
+        for (int i = 0; i < flags.length; ++i) {
+            if (flags[i] == 0) {
+                return i;
+            }
+        }
+        return -1;
     }
 }

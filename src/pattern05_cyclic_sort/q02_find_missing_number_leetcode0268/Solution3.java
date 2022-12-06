@@ -1,4 +1,4 @@
-package pattern05_cyclic_sort.q02_find_missing_number;
+package pattern05_cyclic_sort.q02_find_missing_number_leetcode0268;
 
 /**
  * The description of problem is as follow:
@@ -38,14 +38,13 @@ package pattern05_cyclic_sort.q02_find_missing_number;
  *
  * @author Genpeng Xu (xgp1227atgmail.com)
  */
-public class Solution4 {
+public class Solution3 {
     /**
-     * 解法四
-     * 因为输入数组的范围是 [0, n]，因此，可以根据数组的值把数组放到对应的位置上（比如：0 放到 0 索引位置上），
-     * 此时有两种情况：
-     * 1. 缺失的数字小于 n，则数字 n 在缺失数字的索引上，比如：[4, 0, 3, 1] 缺少 2，调整位置后变为 [0, 1, 4, 3]，
-     *    4 会在 2 的位置上，即第一个索引位置的值不等于索引的位置，即为缺失的数字，上例为 2
-     * 2. 缺失的数字等于 n，比如：[2, 0, 3, 1]，调整位置后变为 [0, 1, 2, 3]，则缺失的数字为 n
+     * 解法三：Math
+     * 用 [0, n] 范围内 n+1 个数之和减去输入数组之和即为缺失的数字。
+     *
+     * 等差数列求和公式为：
+     * S_n = n * (a_1 + a_n) / 2
      *
      * 复杂度分析：
      * 时间复杂度：O(N)
@@ -56,24 +55,11 @@ public class Solution4 {
      */
     public int missingNumber(int[] nums) {
         final int N = nums.length;
-        for (int i = 0; i < N; ++i) {
-            while (nums[i] < N && nums[i] != i) {
-                swap(nums, i, nums[i]);
-            }
+        int totalSum = (N+1) * N / 2;
+        int arrSum = 0;
+        for (int num : nums) {
+            arrSum += num;
         }
-        for (int i = 0; i < N; ++i) {
-            if (nums[i] != i) {
-                return i;
-            }
-        }
-        return N;
-    }
-
-    public void swap(int[] nums, int i, int j) {
-        if (i != j) {
-            int tmp = nums[i];
-            nums[i] = nums[j];
-            nums[j] = tmp;
-        }
+        return totalSum - arrSum;
     }
 }

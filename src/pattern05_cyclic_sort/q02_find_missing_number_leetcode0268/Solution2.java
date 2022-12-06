@@ -1,7 +1,4 @@
-package pattern05_cyclic_sort.q02_find_missing_number;
-
-import java.util.HashSet;
-import java.util.Set;
+package pattern05_cyclic_sort.q02_find_missing_number_leetcode0268;
 
 /**
  * The description of problem is as follow:
@@ -41,56 +38,31 @@ import java.util.Set;
  *
  * @author Genpeng Xu (xgp1227atgmail.com)
  */
-public class Solution1 {
+public class Solution2 {
     /**
-     * 解法一：Hash Table
-     * 用一个数组标记输入数组（大小为 n）中各个数字是否出现，如果出现，标记为 1；否则为 0。
-     * 之后，遍历一次标记数组，返回值为 0 的索引，即为未出现的数字。
+     * 解法二：Bit Manipulation
+     * 对于任意一个整数 x，都有：
+     * - x xor 0 = x
+     * - x xor x = 0
+     * 因此，如果我们在输入数组后面追加 [0, n] 范围内的数（n+1 个），加上输入数组已有的 n 个数，
+     * 总共有 2n+1 个整数，且其中有 n 个数出现 2 次，1 个数出现 1 次。由异或运算的结合律和
+     * 交换律可知，这 2n+1 个数异或后的结果就是只出现 1 次的数字。
      *
      * 复杂度分析：
      * 时间复杂度：O(N)
-     * 空间复杂度：O(N)
+     * 空间复杂度：O(1)
      *
      * @param nums int[], an integer array containing n distinct numbers in the range [0, n]
      * @return int, the missing number in the range
      */
     public int missingNumber(int[] nums) {
-        Set<Integer> seen = new HashSet<>();
+        int xor = 0;
         for (int num : nums) {
-            seen.add(num);
+            xor ^= num;
         }
-        final int N = nums.length;
-        for (int i = 0; i <= N; ++i) {
-            if (!seen.contains(i)) {
-                return i;
-            }
+        for (int i = 0; i <= nums.length; ++i) {
+            xor ^= i;
         }
-        return -1;
-    }
-
-    /**
-     * 解法一：Hash Table
-     * 用一个数组标记输入数组（大小为 n）中各个数字是否出现，如果出现，标记为 1；否则为 0。
-     * 之后，遍历一次标记数组，返回值为 0 的索引，即为未出现的数字。
-     *
-     * 复杂度分析：
-     * 时间复杂度：O(N)
-     * 空间复杂度：O(N)
-     *
-     * @param nums int[], an integer array containing n distinct numbers in the range [0, n]
-     * @return int, the missing number in the range
-     */
-    public int missingNumberV2(int[] nums) {
-        final int N = nums.length;
-        int[] flags = new int[N + 1];
-        for (int num : nums) {
-            flags[num] = 1;
-        }
-        for (int i = 0; i < flags.length; ++i) {
-            if (flags[i] == 0) {
-                return i;
-            }
-        }
-        return -1;
+        return xor;
     }
 }

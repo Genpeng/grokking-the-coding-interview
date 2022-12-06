@@ -1,7 +1,4 @@
-package pattern05_cyclic_sort.q02_find_missing_number;
-
-import java.util.HashSet;
-import java.util.Set;
+package pattern05_cyclic_sort.q02_find_missing_number_leetcode0268;
 
 /**
  * The description of problem is as follow:
@@ -41,15 +38,14 @@ import java.util.Set;
  *
  * @author Genpeng Xu (xgp1227atgmail.com)
  */
-public class Solution2 {
+public class Solution4 {
     /**
-     * 解法二：Bit Manipulation
-     * 对于任意一个整数 x，都有：
-     * - x xor 0 = x
-     * - x xor x = 0
-     * 因此，如果我们在输入数组后面追加 [0, n] 范围内的数（n+1 个），加上输入数组已有的 n 个数，
-     * 总共有 2n+1 个整数，且其中有 n 个数出现 2 次，1 个数出现 1 次。由异或运算的结合律和
-     * 交换律可知，这 2n+1 个数异或后的结果就是只出现 1 次的数字。
+     * 解法四
+     * 因为输入数组的范围是 [0, n]，因此，可以根据数组的值把数组放到对应的位置上（比如：0 放到 0 索引位置上），
+     * 此时有两种情况：
+     * 1. 缺失的数字小于 n，则数字 n 在缺失数字的索引上，比如：[4, 0, 3, 1] 缺少 2，调整位置后变为 [0, 1, 4, 3]，
+     *    4 会在 2 的位置上，即第一个索引位置的值不等于索引的位置，即为缺失的数字，上例为 2
+     * 2. 缺失的数字等于 n，比如：[2, 0, 3, 1]，调整位置后变为 [0, 1, 2, 3]，则缺失的数字为 n
      *
      * 复杂度分析：
      * 时间复杂度：O(N)
@@ -59,13 +55,25 @@ public class Solution2 {
      * @return int, the missing number in the range
      */
     public int missingNumber(int[] nums) {
-        int xor = 0;
-        for (int num : nums) {
-            xor ^= num;
+        final int N = nums.length;
+        for (int i = 0; i < N; ++i) {
+            while (nums[i] < N && nums[i] != i) {
+                swap(nums, i, nums[i]);
+            }
         }
-        for (int i = 0; i <= nums.length; ++i) {
-            xor ^= i;
+        for (int i = 0; i < N; ++i) {
+            if (nums[i] != i) {
+                return i;
+            }
         }
-        return xor;
+        return N;
+    }
+
+    public void swap(int[] nums, int i, int j) {
+        if (i != j) {
+            int tmp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = tmp;
+        }
     }
 }
