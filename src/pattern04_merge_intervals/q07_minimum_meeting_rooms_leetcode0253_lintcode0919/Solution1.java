@@ -1,4 +1,4 @@
-package pattern04_merge_intervals.q07_minimum_meeting_rooms_leetcode0253;
+package pattern04_merge_intervals.q07_minimum_meeting_rooms_leetcode0253_lintcode0919;
 
 import java.util.ArrayList;
 import java.util.Arrays;

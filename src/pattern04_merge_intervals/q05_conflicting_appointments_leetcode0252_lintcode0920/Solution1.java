@@ -1,7 +1,6 @@
-package pattern04_merge_intervals.q05_conflicting_appointments_leetcode0252;
+package pattern04_merge_intervals.q05_conflicting_appointments_leetcode0252_lintcode0920;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 /**
  * The description of problem is as follow:

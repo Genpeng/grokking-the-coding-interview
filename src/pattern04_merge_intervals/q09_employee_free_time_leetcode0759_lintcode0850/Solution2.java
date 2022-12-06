@@ -1,4 +1,4 @@
-package pattern04_merge_intervals.q09_employee_free_time_leetcode0759;
+package pattern04_merge_intervals.q09_employee_free_time_leetcode0759_lintcode0850;
 
 import entities.Interval;
 
@@ -37,9 +37,9 @@ import java.util.List;
  *
  * @author Genpeng Xu (xgp1227atgmail.com)
  */
-public class Solution3_TODO {
+public class Solution2 {
     /**
-     * 解法三：堆（TODO）
+     * 解法二：扫描线算法（Sweep Line）
      *
      * 复杂度分析：
      * 时间复杂度：O(N * logN)
@@ -49,6 +49,28 @@ public class Solution3_TODO {
      * @return List<Interval>, list of finite intervals representing common, positive-length free time for all employees
      */
     public List<Interval> getEmployeeFreeTime(List<List<Interval>> schedule) {
-        return new ArrayList<>();
+        List<int[]> points = new ArrayList<>();
+        for (List<Interval> intervals : schedule) {
+            for (Interval interval : intervals) {
+                points.add(new int[] {interval.start, 1});
+                points.add(new int[] {interval.end, -1});
+            }
+        }
+        List<Interval> result = new ArrayList<>();
+        final int N = points.size();
+        if (N <= 2) {
+            return result;
+        }
+        Collections.sort(points, (p1, p2) -> (p1[0] - p2[0]));
+        int currNum = 0, maxNum = 0;
+        int[] prev = null;
+        for (int[] point : points) {
+            currNum += point[1];
+            if (prev != null && currNum == 0 && point[0] > prev[1]) {
+                result.add(new Interval(prev[1], point[0]));
+            }
+            prev = point;
+        }
+        return result;
     }
 }
