@@ -1,5 +1,7 @@
 package pattern04_merge_intervals.q09_employee_free_time_leetcode0759;
 
+import entities.Interval;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -36,16 +38,6 @@ import java.util.List;
  * @author Genpeng Xu (xgp1227atgmail.com)
  */
 public class Solution1 {
-    class Interval {
-        int start;
-        int end;
-
-        public Interval(int start, int end) {
-            this.start = start;
-            this.end = end;
-        }
-    }
-
     /**
      * 解法一：类似合并区间
      *
