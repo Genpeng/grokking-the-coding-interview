@@ -31,6 +31,16 @@ import java.util.List;
  * @author Genpeng Xu (xgp1227atgmail.com)
  */
 public class Solution1 {
+    /**
+     * 解法一
+     *
+     * 复杂度分析：
+     * - 时间复杂度：O(N)
+     * - 空间复杂度：O(1)
+     *
+     * @param nums int[], an unsorted array containing numbers taken from the range 1 to n
+     * @return List<Integer>, all missing numbers
+     */
     public List<Integer> findAllMissingNumber(int[] nums) {
         final int N = nums.length;
         int i = 0;
