@@ -1,5 +1,7 @@
 package pattern05_cyclic_sort.q01_cyclic_sort;
 
+import utils.ArrayUtil;
+
 import java.util.Arrays;
 
 /**
@@ -43,20 +45,14 @@ public class Solution1 {
         if (nums == null || nums.length < 2) {
             return;
         }
-        final int N = nums.length;
-        int halfLen = (N & 1) == 0 ? N / 2 : N / 2 + 1;
-        for (int i = 0; i < halfLen; ++i) {
-            while (nums[i] - 1 != i) {
-                swap(nums, i, nums[i]-1);
+        int i = 0;
+        while (i < nums.length) {
+            int j = nums[i] - 1; // 实际应该放置的位置
+            if (nums[i] != nums[j]) { // 📢 为什么条件不是 nums[i]-1 != i？
+                ArrayUtil.swap(nums, i, j);
+            } else {
+                ++i;
             }
-        }
-    }
-
-    public static void swap(int[] nums, int i, int j) {
-        if (i != j) {
-            int tmp = nums[i];
-            nums[i] = nums[j];
-            nums[j] = tmp;
         }
     }
 
