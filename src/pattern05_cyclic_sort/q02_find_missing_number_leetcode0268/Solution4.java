@@ -1,5 +1,7 @@
 package pattern05_cyclic_sort.q02_find_missing_number_leetcode0268;
 
+import utils.ArrayUtil;
+
 /**
  * The description of problem is as follow:
  * ==========================================================================================================
@@ -56,13 +58,17 @@ public class Solution4 {
      */
     public int missingNumber(int[] nums) {
         final int N = nums.length;
-        for (int i = 0; i < N; ++i) {
-            while (nums[i] < N && nums[i] != i) {
-                swap(nums, i, nums[i]);
+        int i = 0;
+        while (i < N) {
+            int j = nums[i]; // i 位置的对象实际应该放置的位置
+            if (j < N && nums[i] != nums[j]) { // 📢 为什么是 nums[nums[i]] != nums[i]？
+                ArrayUtil.swap(nums, i, j);
+            } else {
+                ++i;
             }
         }
-        for (int i = 0; i < N; ++i) {
-            if (nums[i] != i) {
+        for (i = 0; i < N; ++i) {
+            if (i != nums[i]) {
                 return i;
             }
         }
